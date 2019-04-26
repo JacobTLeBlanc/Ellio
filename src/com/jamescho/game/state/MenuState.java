@@ -14,10 +14,12 @@ public class MenuState extends State {
 	}
 
 	@Override
-	public void update() {
+	public void update() { }
+	public void update(float delta) {
 		// Do Nothing
 		
 	}
+	
 
 	@Override
 	public void render(Graphics g) {

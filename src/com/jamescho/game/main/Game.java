@@ -73,16 +73,28 @@ public class Game extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
+		
+		long updateDurationMillis = 0;
+		long sleepDurationMillis = 0;
+		
+		
 		// Game loop
 		while (running) {
-			// Update state
-			currentState.update();
-			prepareGameImage();
-			currentState.render(gameImage.getGraphics());
-			repaint();
+			// Time passed
+			long beforeUpdateRender = System.nanoTime();
+			// Total time of last frame
+			long deltaMillis = updateDurationMillis + sleepDurationMillis;
+			
+			updateAndRender(deltaMillis);
+			
+			// Track time it took to update/render
+			updateDurationMillis = (System.nanoTime() - beforeUpdateRender) / 1000000L;
+			// Sleep duration until next frame
+			sleepDurationMillis = Math.max(2, 17 - updateDurationMillis);
+			
 			try {
-				// Delay thread by 14 milliseconds
-				Thread.sleep(14);
+				// Delay thread by sleep time
+				Thread.sleep(sleepDurationMillis);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -91,14 +103,21 @@ public class Game extends JPanel implements Runnable {
 		// End game if not running
 		System.exit(0);
 	}
+
+	private void updateAndRender(long deltaMillis) {
+		// Update state
+		currentState.update(deltaMillis / 1000f);
+		prepareGameImage();
+		currentState.render(gameImage.getGraphics());
+		repaint();
+		renderGameImage(getGraphics());
+	}
 	
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		if (gameImage == null) {
-			return;
+	public void renderGameImage(Graphics g) {
+		if (gameImage != null) {
+			g.drawImage(gameImage, 0, 0, null);
 		}
-		g.drawImage(gameImage, 0, 0, null);
+		g.dispose();
 	}
 
 	private void prepareGameImage() {

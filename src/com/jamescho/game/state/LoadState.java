@@ -17,6 +17,9 @@ public class LoadState extends State {
 	public void update() {
 		setCurrentState(new MenuState());
 	}
+	public void update(float delta) {
+		setCurrentState(new MenuState());
+	}
 
 	@Override
 	public void render(Graphics g) {
