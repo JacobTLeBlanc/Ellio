@@ -46,7 +46,7 @@ public class InputHandler implements KeyListener, MouseListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		currentState.onKeyRelease(e);
+		currentState.onKeyPress(e);
 		
 	}
 

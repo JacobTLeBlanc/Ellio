@@ -34,7 +34,7 @@ public class Resources {
 		// Load images
 		welcome = loadImage("welcome.png");
 		iconimage = loadImage("iconimage.png");
-		block = loadImage("iconimage.png");
+		block = loadImage("block.png");
 		cloud1 = loadImage("cloud1.png");
 		cloud2 = loadImage("cloud2.png");
 		duck = loadImage("duck.png");

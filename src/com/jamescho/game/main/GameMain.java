@@ -20,7 +20,7 @@ public class GameMain {
 		// Prevent manual resizing of window
 		frame.setResizable(false);
 		
-		// Create game instance and add to frame
+		// Create game instance and add to frameg.drawImage(Resources.cloud1, (int) cloud.getX(), (int) cloud.getY(), 100, 60, null);
 		sGame = new Game(GAME_WIDTH, GAME_HEIGHT);
 		frame.add(sGame);
 		frame.pack();
